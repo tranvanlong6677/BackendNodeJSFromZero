@@ -19,15 +19,6 @@ configViewEngine(app);
 // webRoutes
 app.use("/", webRoutes);
 
-
-connection.query(
-  'SELECT * FROM `Users` WHERE `name` = "long tran" ',
-  function(err, results, fields) {
-    console.log("check results",results); 
-    // console.log("check fields",fields); 
-  }
-);
-
 app.listen(port, hostname, () => {
   console.log(`Example app listening on port ${port}`);
 });
