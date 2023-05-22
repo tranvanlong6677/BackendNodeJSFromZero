@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import * as dotenv from "dotenv";
 import configViewEngine from "./config/viewEngine.js";
 import webRoutes from "./routes/web.js";
-
+import mysql from "mysql2";
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -17,7 +17,22 @@ const hostname = process.env.HOST_NAME || "localhost";
 configViewEngine(app);
 
 // webRoutes
-app.use("/",webRoutes)
+app.use("/", webRoutes);
+
+const connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  database: "hoidanit",
+  port:3307,
+  password:"123456"
+});
+connection.query(
+  'SELECT * FROM `Users` WHERE `name` = "long tran" ',
+  function(err, results, fields) {
+    console.log("check results",results); 
+    // console.log("check fields",fields); 
+  }
+);
 
 app.listen(port, hostname, () => {
   console.log(`Example app listening on port ${port}`);
