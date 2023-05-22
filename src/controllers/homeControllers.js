@@ -8,4 +8,9 @@ const getHomePage = (req, res) => {
 const getSample = (req, res) => {
   res.render("sample.ejs");
 };
-export { getHomePage, getSample };
+
+const postCreateUser = (req, res) => {
+  console.log(">>> check req body",req.body);
+  res.send("create-user");
+}
+export { getHomePage, getSample,postCreateUser };
