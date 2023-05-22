@@ -8,9 +8,6 @@ dotenv.config();
 //     database: process.env.DB_NAME,
 //     port:process.env.DB_PORT,
 //     password:process.env.DB_PASSWORD,
-//     // connectionLimit:10,
-//     // waitForConnections: true,
-//     // queueLimit:0
 //   });
 
 const connection = mysql.createPool({
