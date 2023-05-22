@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import * as dotenv from "dotenv";
 import configViewEngine from "./config/viewEngine.js";
 import webRoutes from "./routes/web.js";
-import mysql from "mysql2";
+import connection from './config/database.js'
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -19,13 +19,7 @@ configViewEngine(app);
 // webRoutes
 app.use("/", webRoutes);
 
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "hoidanit",
-  port:3307,
-  password:"123456"
-});
+
 connection.query(
   'SELECT * FROM `Users` WHERE `name` = "long tran" ',
   function(err, results, fields) {
