@@ -17,14 +17,27 @@
         <th>Email</th>
         <th>Name</th>
         <th>City</th>
+        <th>Actions</th>
       </tr>
-      <tr>
-        <td>Peter</td>
-        <td>Griffin</td>
-        <td>Griffin</td>
-        <td>Griffin</td>
-
-      </tr>
+      <% for (var i = 0; i < listUsers.length; i++) { %>
+        <tr>
+          <td><%= listUsers[i].id %></td>
+          <td><%= listUsers[i].email %></td>
+          <td><%= listUsers[i].name %></td>
+          <td><%= listUsers[i].city %></td>
+          <td>
+            <button style="padding: 10px 20px; margin: 10px">
+              <a href="/edit-user/<%= listUsers[i].id %>">Edit</a>
+            </button>
+            <button style="padding: 10px 20px;">
+              <a href="/delete-user/<%= listUsers[i].id %>">Delete</a>
+            </button>
+          </td>
+  
+  
+        </tr>
+      <% } %>
+      
       
     </table>
     
