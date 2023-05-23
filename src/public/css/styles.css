@@ -32,6 +32,13 @@
     max-width: 500px;
     
 }
-.input-group {
-  
+table, td, th {
+  border: 1px solid;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  margin:50px auto;
+  width:600px;
 }
