@@ -3,22 +3,24 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import mongoose from "mongoose";
 
-const dbState = [{
-  value: 0,
-  label: "disconnected"
-},
-{
-  value: 1,
-  label: "connected"
-},
-{
-  value: 2,
-  label: "connecting"
-},
-{
-  value: 3,
-  label: "disconnecting"
-}];
+const dbState = [
+  {
+    value: 0,
+    label: "disconnected",
+  },
+  {
+    value: 1,
+    label: "connected",
+  },
+  {
+    value: 2,
+    label: "connecting",
+  },
+  {
+    value: 3,
+    label: "disconnecting",
+  },
+];
 // const connection = mysql.createConnection({
 //     host: process.env.DB_HOST,
 //     user: process.env.DB_USER,
@@ -39,13 +41,13 @@ const dbState = [{
 //   });
 
 const connection = async () => {
-  try {
-    await mongoose.connect("mongodb://root:123456@127.0.0.1:27018/");
-    const state = Number(mongoose.connection.readyState);
-    console.log(dbState.find(f => f.value == state).label, "to database");
-  } catch (error) {
-    console.log(error);
-  }
+  const options = {
+    user: process.env.DB_USER,
+    pass: process.env.DB_PASSWORD,
+  };
+  await mongoose.connect(process.env.DB_HOST, options);
+  const state = Number(mongoose.connection.readyState);
+  console.log(dbState.find((f) => f.value == state).label, "to database");
 };
 
 export default connection;
