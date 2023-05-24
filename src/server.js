@@ -5,6 +5,7 @@ import * as dotenv from "dotenv";
 import configViewEngine from "./config/viewEngine.js";
 import webRoutes from "./routes/web.js";
 import connection from "./config/database.js";
+import mongoose from "mongoose";
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -25,7 +26,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", webRoutes);
 
 // test connection
-connection();
+const kittySchema = new mongoose.Schema({
+  name: String,
+});
+const Kitten = mongoose.model("Kitten", kittySchema);
+const silence = new Kitten({ name: "Silence" });
+silence.save();
+
 (async () => {
   try {
     await connection();
@@ -36,5 +43,3 @@ connection();
     console.log(error);
   }
 })();
-
-
