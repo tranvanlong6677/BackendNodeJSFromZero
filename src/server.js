@@ -6,7 +6,6 @@ import configViewEngine from "./config/viewEngine.js";
 import webRoutes from "./routes/web.js";
 import connection from "./config/database.js";
 import mongoose from "mongoose";
-import Kitten from "./models/Kitten.js";
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -27,8 +26,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", webRoutes);
 
 // test connection
-const cat = new Kitten({ name: "Long Tran" });
-cat.save();
 
 (async () => {
   try {

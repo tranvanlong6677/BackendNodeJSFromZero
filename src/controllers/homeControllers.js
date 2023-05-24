@@ -1,8 +1,10 @@
 import connection from "../config/database.js";
+import User from "../models/Users.js";
 
 const getHomePage = async (req, res) => {
-  const [rows, fields] = await connection.execute("SELECT * FROM Users");
-  let listUsers = rows;
+  // const [rows, fields] = await connection.execute("SELECT * FROM Users");
+  // let listUsers = rows;
+  let listUsers = [];
   return res.render("home.ejs", { listUsers });
 };
 
@@ -13,18 +15,11 @@ const getSample = (req, res) => {
 const postCreateUser = async (req, res) => {
   const { email, name, city } = req.body;
 
-  // connection.query(
-  //   `INSERT INTO Users (email,name,city) VALUES (?,?,?)`,
-  //   [email, name, city],
-  //   function (err, results, fields) {
-  //     console.log(results);
-  //     res.send("Create user success");
-  //   }
+  // const [rows, fields] = await connection.execute(
+  //   "INSERT INTO Users (email,name,city) VALUES (?,?,?)",
+  //   [email, name, city]
   // );
-  const [rows, fields] = await connection.execute(
-    "INSERT INTO Users (email,name,city) VALUES (?,?,?)",
-    [email, name, city]
-  );
+  await User.create({ email, name, city });
 
   res.send("Create user success");
 };
