@@ -16,7 +16,7 @@ router.get("/", getHomePage);
 router.post("/create-user", postCreateUser);
 router.get("/create",getCreatePage);
 router.get("/sample", getSample);
-router.get("/delete-user/:id",getDeleteUser)
+router.get("/delete-user/:id",getDeleteUser , getHomePage)
 router.get("/edit-user/:id",getEditUserPage)
 router.post("/edit-user-submit/:id",getSubmitEdit)
 
