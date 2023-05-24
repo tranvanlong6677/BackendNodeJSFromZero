@@ -4,7 +4,8 @@ import User from "../models/Users.js";
 const getHomePage = async (req, res) => {
   // const [rows, fields] = await connection.execute("SELECT * FROM Users");
   // let listUsers = rows;
-  let listUsers = [];
+
+  let listUsers = await User.find({});
   return res.render("home.ejs", { listUsers });
 };
 
