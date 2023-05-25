@@ -50,7 +50,6 @@ const getEditUserPage = async (req, res) => {
 
 const getSubmitEdit = async (req, res) => {
   const { email, name, city } = req.body;
-  console.log(">>> chekc req.body", req.body);
   const id = req.params.id;
   try {
     await User.updateOne({ _id: id }, { email: email, name: name, city: city });
