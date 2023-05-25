@@ -11,11 +11,6 @@ const getSample = (req, res) => {
 
 const postCreateUser = async (req, res) => {
   const { email, name, city } = req.body;
-
-  // const [rows, fields] = await connection.execute(
-  //   "INSERT INTO Users (email,name,city) VALUES (?,?,?)",
-  //   [email, name, city]
-  // );
   await User.create({ email, name, city });
 
   res.send("Create user success");
@@ -24,16 +19,6 @@ const postCreateUser = async (req, res) => {
 const getCreatePage = (req, res) => {
   res.render("create.ejs");
 };
-
-function validateObjectId (id) {
-  if (ObjectId.isValid(id)) {
-      const obj = new ObjectId(id);
-      if (obj == id) {
-          return true;
-      }
-  }
-  return false;
-}
 
 const getAllUser = async (req, res) => {
   // connection.query(`SELECT * FROM Users`, function (err, results, fields) {

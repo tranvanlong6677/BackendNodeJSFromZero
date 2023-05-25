@@ -8,7 +8,19 @@ const getUsersAPI = async (req, res) => {
     EM:"Get list users success"
   })
 };
+const getCreatePage = (req, res) => {
+    res.render("create.ejs");
+  };
+const postUserAPI = async (req, res) => {
+    const { email, name, city } = req.body;
+    let results = await User.create({ email, name, city });
+    return res.status(200).json({
+      EC:0,
+      DT:results,
+      EM:"Get list users success"
+    })
+  };
 
 export {
-    getUsersAPI,
+    getUsersAPI,postUserAPI
 }
