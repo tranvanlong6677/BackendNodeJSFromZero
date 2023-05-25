@@ -3,13 +3,7 @@ import connection from "../config/database.js";
 import User from "../models/Users.js";
 import mongoose from "mongoose";
 
-const getHomePage = async (req, res) => {
-  // const [rows, fields] = await connection.execute("SELECT * FROM Users");
-  // let listUsers = rows;
 
-  let listUsers = await User.find({});
-  return res.render("home.ejs", { listUsers });
-};
 
 const getSample = (req, res) => {
   res.render("sample.ejs");
@@ -87,7 +81,6 @@ const getSubmitEdit = async (req, res) => {
   res.redirect("/");
 };
 export {
-  getHomePage,
   getSample,
   postCreateUser,
   getCreatePage,
