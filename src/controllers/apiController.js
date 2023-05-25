@@ -21,11 +21,25 @@ const postUserAPI = async (req, res) => {
 const postUpdateUserAPI = async (req, res) => {
   const { email, name, city } = req.body;
   const id = req.params.id;
-  let result =  await User.updateOne({ _id: id }, { email: email, name: name, city: city });
+  let result = await User.updateOne(
+    { _id: id },
+    { email: email, name: name, city: city }
+  );
   return res.status(200).json({
     EC: 0,
     DT: result,
     EM: "Update user success",
   });
 };
-export { getUsersAPI, postUserAPI, postUpdateUserAPI };
+
+const deleteUserAPI = async (req, res) => {
+  let id = req.params.id;
+  let result = await User.deleteOne({ _id: id });
+
+  return res.status(200).json({
+    EC: 0,
+    DT: result,
+    EM: "Delete user success",
+  });
+};
+export { getUsersAPI, postUserAPI, postUpdateUserAPI, deleteUserAPI };
