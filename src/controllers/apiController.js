@@ -1,4 +1,5 @@
 import User from "../models/Users.js";
+import { uploadSingleFile } from "../services/fileService.js";
 
 const getUsersAPI = async (req, res) => {
   let listUsers = await User.find({});
@@ -42,4 +43,21 @@ const deleteUserAPI = async (req, res) => {
     EM: "Delete user success",
   });
 };
-export { getUsersAPI, postUserAPI, postUpdateUserAPI, deleteUserAPI };
+
+const postUploadSingleFileApi = async (req, res) => {
+  console.log(">>> check", req.files);
+  if (!req.files || Object.keys(req.files).length === 0) {
+    res.status(400).send("No files were uploaded.");
+    return;
+  }
+  let result = await uploadSingleFile(req?.files?.image);
+  console.log(">>> check result", result);
+  return res.send("Ok single");
+};
+export {
+  getUsersAPI,
+  postUserAPI,
+  postUpdateUserAPI,
+  deleteUserAPI,
+  postUploadSingleFileApi,
+};

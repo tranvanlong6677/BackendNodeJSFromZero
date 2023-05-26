@@ -6,7 +6,7 @@ import configViewEngine from "./config/viewEngine.js";
 import webRoutes from "./routes/web.js";
 import apiRoutes from "./routes/api.js";
 import connection from "./config/database.js";
-const fileUpload = require('express-fileupload');
+import fileUpload from 'express-fileupload';
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
