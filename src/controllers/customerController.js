@@ -8,6 +8,7 @@ import {
   createCustomerArrService,
   getAllCustomersService,
   updateCustomerService,
+  deleteCustomerService,
 } from "../services/customerService.js";
 const postCreateCustomer = async (req, res) => {
   let { name, address, phone, email, description } = req.body;
@@ -66,9 +67,18 @@ const putUpdateCustomers = async (req, res) => {
     data: data,
   });
 };
+const deleteCustomer = async (req, res) => {
+  let { id } = req.params;
+  let result = await deleteCustomerService(id);
+  return res.status(200).json({
+    EC: 0,
+    data: result,
+  });
+};
 export {
   postCreateCustomer,
   postCreateCustomerArr,
   getAllCustomers,
   putUpdateCustomers,
+  deleteCustomer,
 };

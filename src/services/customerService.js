@@ -34,12 +34,20 @@ const getAllCustomersService = async () => {
 };
 const updateCustomerService = async (id, name, email, address) => {
   let res = await Customer.updateOne({ _id: id }, { name, email, address });
-  console.log(">>> check res", res);
   return res;
+};
+const deleteCustomerService = async (id) => {
+  try {
+    let res = await Customer.deleteById(id);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
 };
 export {
   createCustomerService,
   createCustomerArrService,
   getAllCustomersService,
-  updateCustomerService
+  updateCustomerService,
+  deleteCustomerService,
 };
