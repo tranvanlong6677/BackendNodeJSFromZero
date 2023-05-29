@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoose_delete from 'mongoose-delete';
 const customerSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -10,6 +11,7 @@ const customerSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+customerSchema.plugin(mongoose_delete);
 const Customer = mongoose.model("Customers", customerSchema);
 
 export default Customer;

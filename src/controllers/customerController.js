@@ -7,7 +7,7 @@ import {
   createCustomerService,
   createCustomerArrService,
   getAllCustomersService,
-  updateCustomerService
+  updateCustomerService,
 } from "../services/customerService.js";
 const postCreateCustomer = async (req, res) => {
   let { name, address, phone, email, description } = req.body;
@@ -62,10 +62,9 @@ const putUpdateCustomers = async (req, res) => {
   let id = req.params.id;
   let data = await updateCustomerService(id, name, email, address);
   return res.status(200).json({
-    EC:0,
-    data:data
-  })
-
+    EC: 0,
+    data: data,
+  });
 };
 export {
   postCreateCustomer,
