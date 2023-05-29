@@ -24,4 +24,22 @@ const createCustomerArrService = async (cusArr) => {
     return null;
   }
 };
-export { createCustomerService, createCustomerArrService };
+const getAllCustomersService = async () => {
+  try {
+    let data = await Customer.find({});
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+const updateCustomerService = async (id, name, email, address) => {
+  let res = await Customer.updateOne({ _id: id }, { name, email, address });
+  console.log(">>> check res", res);
+  return res;
+};
+export {
+  createCustomerService,
+  createCustomerArrService,
+  getAllCustomersService,
+  updateCustomerService
+};

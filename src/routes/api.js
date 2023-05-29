@@ -7,7 +7,7 @@ import {
   postUploadSingleFileApi,
   postUploadMultipleFilesApi,
 } from "../controllers/apiController.js";
-import { postCreateCustomer,postCreateCustomerArr } from "../controllers/customerController.js";
+import { postCreateCustomer,postCreateCustomerArr,getAllCustomers ,putUpdateCustomers} from "../controllers/customerController.js";
 
 const routerAPI = express.Router();
 // Users
@@ -21,6 +21,9 @@ routerAPI.post("/files", postUploadMultipleFilesApi);
 // Customers
 routerAPI.post("/customers", postCreateCustomer);
 routerAPI.post("/customers-many", postCreateCustomerArr);
+
+routerAPI.get("/customers",getAllCustomers);
+routerAPI.put("/customers/:id",putUpdateCustomers);
 
 
 export default routerAPI;

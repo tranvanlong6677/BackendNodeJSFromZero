@@ -6,6 +6,8 @@ import {
 import {
   createCustomerService,
   createCustomerArrService,
+  getAllCustomersService,
+  updateCustomerService
 } from "../services/customerService.js";
 const postCreateCustomer = async (req, res) => {
   let { name, address, phone, email, description } = req.body;
@@ -40,12 +42,34 @@ const postCreateCustomerArr = async (req, res) => {
       data: data,
       message: "create arr cus success",
     });
-  }else{
+  } else {
     return res.status(500).json({
-        EC: -1,
-        data: null,
-        message: "create arr cus failed",
-      });
+      EC: -1,
+      data: null,
+      message: "create arr cus failed",
+    });
   }
 };
-export { postCreateCustomer, postCreateCustomerArr };
+const getAllCustomers = async (req, res) => {
+  let customersList = await getAllCustomersService();
+  return res.status(200).json({
+    EC: 0,
+    data: customersList,
+  });
+};
+const putUpdateCustomers = async (req, res) => {
+  let { name, email, address } = req.body;
+  let id = req.params.id;
+  let data = await updateCustomerService(id, name, email, address);
+  return res.status(200).json({
+    EC:0,
+    data:data
+  })
+
+};
+export {
+  postCreateCustomer,
+  postCreateCustomerArr,
+  getAllCustomers,
+  putUpdateCustomers,
+};
