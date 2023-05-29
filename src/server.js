@@ -15,7 +15,6 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = process.env.PORT || 8080;
 const hostname = process.env.HOST_NAME;
-
 // default options
 app.use(fileUpload());
 

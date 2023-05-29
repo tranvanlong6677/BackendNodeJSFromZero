@@ -1,5 +1,8 @@
 import User from "../models/Users.js";
-import { uploadSingleFile } from "../services/fileService.js";
+import {
+  uploadSingleFile,
+  uploadMultipleFiles,
+} from "../services/fileService.js";
 
 const getUsersAPI = async (req, res) => {
   let listUsers = await User.find({});
@@ -45,14 +48,32 @@ const deleteUserAPI = async (req, res) => {
 };
 
 const postUploadSingleFileApi = async (req, res) => {
-  console.log(">>> check", req.files);
   if (!req.files || Object.keys(req.files).length === 0) {
     res.status(400).send("No files were uploaded.");
     return;
   }
   let result = await uploadSingleFile(req?.files?.image);
-  console.log(">>> check result", result);
-  return res.send("Ok single");
+  return res.status(200).json({
+    EC: 0,
+    DT: result,
+    EM: "Upload file success",
+  });
+};
+
+const postUploadMultipleFilesApi = async (req, res) => {
+  if (!req.files || Object.keys(req.files).length === 0) {
+    res.status(400).send("No files were uploaded.");
+    return;
+  }
+  if (Array.isArray(req.files.image)) {
+    let result = await uploadMultipleFiles(req.files.image);
+    return res.status(200).json({
+      EC: 0,
+      data: result,
+    });
+  } else {
+    return await postUploadSingleFileApi(req, res);
+  }
 };
 export {
   getUsersAPI,
@@ -60,4 +81,5 @@ export {
   postUpdateUserAPI,
   deleteUserAPI,
   postUploadSingleFileApi,
+  postUploadMultipleFilesApi,
 };

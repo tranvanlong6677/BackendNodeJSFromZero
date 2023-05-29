@@ -4,7 +4,9 @@ import {
   postUserAPI,
   postUpdateUserAPI,
   deleteUserAPI,
-  postUploadSingleFileApi
+  postUploadSingleFileApi,
+  postUploadMultipleFilesApi,
+  
 } from "../controllers/apiController.js";
 
 const routerAPI = express.Router();
@@ -14,6 +16,8 @@ routerAPI.post("/users", postUserAPI);
 routerAPI.put("/users/:id", postUpdateUserAPI);
 routerAPI.delete("/users/:id", deleteUserAPI);
 routerAPI.post("/file", postUploadSingleFileApi);
+routerAPI.post("/files", postUploadMultipleFilesApi);
+
 
 
 export default routerAPI;
