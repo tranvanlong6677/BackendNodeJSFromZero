@@ -8,7 +8,7 @@ const uploadSingleFile = async (objectFiles) => {
   //   sampleFile = req.files.image;
 
   let uploadPath = path.resolve(__dirname, "../public/img/upload");
-  let extName = path.extname(objectFiles.name);
+  let extName = path.extname(objectFiles.name);//duoi file
   let baseName = path.basename(objectFiles.name, extName);
   let finalName = `${baseName}-${Date.now()}${extName}`;
   let finalPath = `${uploadPath}/${finalName}`;

@@ -15,4 +15,13 @@ const createCustomerService = async (data) => {
     console.log(error);
   }
 };
-export { createCustomerService };
+const createCustomerArrService = async (cusArr) => {
+  try {
+    let data = await Customer.insertMany(cusArr);
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+export { createCustomerService, createCustomerArrService };
