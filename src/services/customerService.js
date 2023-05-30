@@ -1,4 +1,5 @@
 import Customer from "../models/Customers.js";
+import aqp from "api-query-params";
 
 const createCustomerService = async (data) => {
   let { name, address, phone, email, description, image } = data;
@@ -25,13 +26,38 @@ const createCustomerArrService = async (cusArr) => {
     return null;
   }
 };
-const getAllCustomersService = async (page, limit) => {
+const getAllCustomersService = async (queryString) => {
   try {
     let data = null;
-    if (page && limit) {
+
+    let limit = +queryString.limit;
+    let page = +queryString.page;
+  
+
+    // if (page && limit) {
+    //   let skip = (page - 1) * limit;
+    //   if (name) {
+    //     data = await Customer.find({
+    //       name: { $regex: ".*" + name + ".*" },
+    //     })
+    //       .skip(skip)
+    //       .limit(limit);
+    //   } else {
+    //     data = await Customer.find({}).skip(skip).limit(limit);
+    //   }
+    // }
+
+    if (limit && page) {
       let skip = (page - 1) * limit;
-      data = await Customer.find({}).skip(skip).limit(limit).exec();
-    } else {
+      const { filter } = aqp(queryString);
+      delete filter.page;
+      data = await Customer.find(filter).skip(skip).limit(limit).exec();
+      console.log("data",data)
+    }
+    // else {
+    //   data = await Customer.find({}).skip(skip).limit(limit);
+    // }
+    else {
       data = await Customer.find({});
     }
     return data;
