@@ -9,6 +9,7 @@ import {
   getAllCustomersService,
   updateCustomerService,
   deleteCustomerService,
+  deleteCustomersService,
 } from "../services/customerService.js";
 const postCreateCustomer = async (req, res) => {
   let { name, address, phone, email, description } = req.body;
@@ -75,10 +76,20 @@ const deleteCustomer = async (req, res) => {
     data: result,
   });
 };
+const deleteCustomers = async (req, res) => {
+  let listIdDelete = req.body.customersId;
+  let data = await deleteCustomersService(listIdDelete);
+  return res.status(200).json({
+    EC: 0,
+    data: data,
+  });
+};
+
 export {
   postCreateCustomer,
   postCreateCustomerArr,
   getAllCustomers,
   putUpdateCustomers,
   deleteCustomer,
+  deleteCustomers,
 };

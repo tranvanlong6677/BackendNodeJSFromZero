@@ -1,4 +1,5 @@
 import Customer from "../models/Customers.js";
+
 const createCustomerService = async (data) => {
   let { name, address, phone, email, description, image } = data;
   try {
@@ -44,10 +45,20 @@ const deleteCustomerService = async (id) => {
     console.log(error);
   }
 };
+const deleteCustomersService = async (listIdDelete) => {
+  try {
+    let res = await Customer.delete({ _id: { $in: listIdDelete } });
+    return res;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
 export {
   createCustomerService,
   createCustomerArrService,
   getAllCustomersService,
   updateCustomerService,
   deleteCustomerService,
+  deleteCustomersService,
 };
