@@ -53,7 +53,10 @@ const postCreateCustomerArr = async (req, res) => {
   }
 };
 const getAllCustomers = async (req, res) => {
-  let customersList = await getAllCustomersService();
+  let limit = +req.query.limit;
+  let page = +req.query.page;
+
+  let customersList = await getAllCustomersService(page,limit);
   return res.status(200).json({
     EC: 0,
     data: customersList,
