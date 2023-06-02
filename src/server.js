@@ -35,17 +35,18 @@ app.use("/v1/api/", apiRoutes);
 (async () => {
   try {
     // using mongoose
-    // await connection();
+    await connection();
 
     // using mongodb driver
-    const url = process.env.DB_HOST_WITH_DRIVER;
-    const client = new MongoClient(url);
+    // const url = process.env.DB_HOST_WITH_DRIVER;
+    // const client = new MongoClient(url);
 
-    const dbName = process.env.DB_NAME;
-    await client.connect();
-    console.log('Connected successfully to server');
-    const db = client.db(dbName);
-    const collection = db.collection('documents');
+    // const dbName = process.env.DB_NAME;
+    // await client.connect();
+    // console.log("Connected successfully to server");
+    // const db = client.db(dbName);
+    // const collection = db.collection("customers");
+    // collection.insertOne({ name: "Long", age: "23" });
     app.listen(port, hostname, () => {
       console.log(`App listening on port ${port}`);
     });
