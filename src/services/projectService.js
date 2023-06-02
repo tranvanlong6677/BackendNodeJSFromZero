@@ -1,4 +1,5 @@
 import Project from "../models/project.js";
+import aqp from "api-query-params";
 
 const postProjectService = async (infoProject) => {
   let data = null;
@@ -8,17 +9,13 @@ const postProjectService = async (infoProject) => {
     }
     if (infoProject.type === "ADD_USER") {
       let project = await Project.findById(infoProject.projectId);
-      console.log(">>> check project", project);
-      console.log(">>> check infoProject", infoProject);
 
       for (let i = 0; i < infoProject.usersArr.length; i++) {
-        // infoProject
         if (!project.usersInfor.includes(infoProject.usersArr[i])) {
           project.usersInfor.push(infoProject.usersArr[i]);
         }
       }
       let newProject = await project.save();
-      console.log(">>> check new project", newProject);
       return newProject;
     }
   } catch (error) {
@@ -27,4 +24,15 @@ const postProjectService = async (infoProject) => {
   }
   return data;
 };
-export { postProjectService };
+
+const getProjectService = async (data) => {
+  const { filter, limit,population } = aqp(data);
+  console.log(population)
+  const page = filter.page;
+  delete filter.page;
+  let skip = (page - 1) * limit;
+  data = await Project.find(filter).populate(population).skip(skip).limit(limit).exec();
+
+  return data;
+};
+export { postProjectService, getProjectService };

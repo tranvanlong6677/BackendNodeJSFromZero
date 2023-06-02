@@ -32,31 +32,14 @@ const getAllCustomersService = async (queryString) => {
 
     let limit = +queryString.limit;
     let page = +queryString.page;
-  
-
-    // if (page && limit) {
-    //   let skip = (page - 1) * limit;
-    //   if (name) {
-    //     data = await Customer.find({
-    //       name: { $regex: ".*" + name + ".*" },
-    //     })
-    //       .skip(skip)
-    //       .limit(limit);
-    //   } else {
-    //     data = await Customer.find({}).skip(skip).limit(limit);
-    //   }
-    // }
 
     if (limit && page) {
       let skip = (page - 1) * limit;
       const { filter } = aqp(queryString);
       delete filter.page;
       data = await Customer.find(filter).skip(skip).limit(limit).exec();
-      console.log("data",data)
     }
-    // else {
-    //   data = await Customer.find({}).skip(skip).limit(limit);
-    // }
+
     else {
       data = await Customer.find({});
     }

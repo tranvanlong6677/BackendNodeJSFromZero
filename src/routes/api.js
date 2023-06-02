@@ -8,7 +8,7 @@ import {
   postUploadMultipleFilesApi,
 } from "../controllers/apiController.js";
 import { postCreateCustomer,postCreateCustomerArr,getAllCustomers ,putUpdateCustomers,deleteCustomer,deleteCustomers} from "../controllers/customerController.js";
-import {postProject} from '../controllers/projectController.js'
+import {postProject,getProject} from '../controllers/projectController.js'
 const routerAPI = express.Router();
 // Users
 routerAPI.get("/users", getUsersAPI);
@@ -28,6 +28,8 @@ routerAPI.delete("/customers/:id",deleteCustomer);
 routerAPI.delete("/customers-many",deleteCustomers);
 
 routerAPI.post("/projects",postProject);
+routerAPI.get("/projects",getProject);
+
 
 
 
