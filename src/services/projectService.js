@@ -21,7 +21,6 @@ const postProjectService = async (infoProject) => {
     if (infoProject.type === "REMOVE_USERS") {
       console.log(infoProject);
       let project = await Project.findOne({ _id: infoProject.projectId });
-      console.log("project ", project);
       infoProject.usersArr.map((item) => {
         project.usersInfor.pull(item);
       });
@@ -51,7 +50,6 @@ const getProjectService = async (data) => {
 const deleteProjectService = async (id) => {
   let data = null;
   try {
-    // data = await Project.deleteOne({ _id: id });
     data = await Project.delete({ _id: { $in: id } });
   } catch (error) {
     console.log(error);

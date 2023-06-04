@@ -2,7 +2,7 @@ import {
   getTasksService,
   createTaskService,
   updateTaskService,
-  deleteTaskService
+  deleteTaskService,
 } from "../services/taskService.js";
 
 const getTasks = async (req, res) => {
@@ -23,6 +23,7 @@ const createTask = async (req, res) => {
   }
 };
 const updateTask = async (req, res) => {
+  console.log("check req.body update", req.body);
   let dataUpdate = req.body;
   dataUpdate.id = req.params.id;
   let data = await updateTaskService(req.body);
