@@ -53,7 +53,6 @@ const deleteProjectService = async (id) => {
   try {
     // data = await Project.deleteOne({ _id: id });
     data = await Project.delete({ _id: { $in: id } });
-    console.log(">>> check soft", data);
   } catch (error) {
     console.log(error);
     data = null;
